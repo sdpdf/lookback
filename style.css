@@ -17,6 +17,7 @@ font-size:60px;
 .box{
   position: relative;
 }
+
 .bottom-left {
 position: absolute;
   bottom: -50px;
