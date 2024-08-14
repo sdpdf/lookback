@@ -1,10 +1,48 @@
 
-body {
-margin: 0;
-padding: 20px;
-font-family: Arial, sans-serif;
-background-color: white;
-font-size: 30px;
+a{
+color:#444
+}
+hr{
+margin:35px 0px;
+color:#fff;
+
+width:50%
+}
+font#date{
+font-family:serif;
+font-size:60px;
+
+}
+
+.box{
+  position: relative;
+}
+.bottom-left {
+position: absolute;
+  bottom: -50px;
+  left: 25px;
+font-family:serif;
+font-size:60px;
+color: white
+}
+ul {
+  list-style: none;
+}
+li {
+      padding: 5px 0;
+    }
+p#gray{
+font-size:20px;
+    color:#444;
+  }
+
+body{
+font-size:35px;
+font-family:"Hiragino Sans W5";
+font-weight:100;
+padding:0px;
+margin:0px;
+overflow-wrap: break-all;
 }
 
 h1 {
