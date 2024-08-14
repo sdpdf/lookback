@@ -7,6 +7,25 @@
 
 </head>
 <body>
+    <img id="monthlyImage" alt="Monthly Image" class="month">
+
+    <script>
+        // 現在の月を取得（1月 = 0、2月 = 1 ... 12月 = 11）
+        var currentDate = new Date();
+        var currentMonth = currentDate.getMonth(); // 0から始まるので注意
+
+        // 月ごとのファイル名を配列に格納
+        var monthImages = [
+            "https:/sdpdf.github.io/archive/Jan.png", "https:/sdpdf.github.io/archive/Feb.png", "https:/sdpdf.github.io/archive/Mar.png", "https:/sdpdf.github.io/archive/Apr.png", "https:/sdpdf.github.io/archive/May.png", "https:/sdpdf.github.io/archive/Jun.png", 
+            "https:/sdpdf.github.io/archive/Jul.png", "https:/sdpdf.github.io/archive/Aug.png", "https:/sdpdf.github.io/archive/Sep.png", "https:/sdpdf.github.io/archive/Oct.png", "https:/sdpdf.github.io/archive/Nov.png", "https:/sdpdf.github.io/archive/Dec.png"
+        ];
+
+        // 現在の月に対応する画像ファイルを設定
+        var imageFile = monthImages[currentMonth];
+
+        // imgタグのsrc属性に画像ファイルをセット
+        document.getElementById("monthlyImage").src = imageFile;
+    </script>
 
     <script>
         function getDayOfWeek(date) {
@@ -37,6 +56,9 @@
     <h1 class="title">浪人回顧</h1>
 
     <p id="date" class="date">読み込み中...</p>
+    
+    <div class="body">
+
     <table id="timetable">
         <thead>
             <tr>
@@ -119,8 +141,9 @@
         }
         document.addEventListener('DOMContentLoaded', displayTodayEvent);
     </script>
-</head>
-<body>
+
+
     <p id="result">読み込み中...</p>
+</div>
 </body>
 </html>
