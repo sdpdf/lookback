@@ -81,4 +81,7 @@ a{
     div.body {
         padding: 30px;
     }
-    
+    img.month {
+        width: 100%;
+    }
+
