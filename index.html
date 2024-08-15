@@ -136,32 +136,56 @@
     
 
     <script>
+        // 特別な定数名
+        const CSV_FILE_URL = 'tw.csv';
+        const DATE_FORMAT = 'M/D';
+        const CONTENT_ID = 'tweet';
+        const NUMERIC_VALUE_ID = 'num';
+    
         async function fetchEvent(date) {
-            const response = await fetch('tw.csv');
-            const text = await response.text();
-            const rows = text.split('\n');
-            const events = rows.slice(1).map(row => row.split(','));
-            for (let [csvDate, event] of events) {
-                if (csvDate === date) {
-                    return event;
+            try {
+                const response = await fetch(CSV_FILE_URL);
+                if (!response.ok) {
+                    throw new Error('ネットワークエラーが発生しました');
                 }
+                const text = await response.text();
+                const rows = text.split('\n');
+                const events = rows.slice(1).map(row => row.split(','));
+    
+                // 日付に応じて2列目と3列目のデータを取得
+                for (let [csvDate, content, numericValue] of events) {
+                    if (csvDate === date) {
+                        return { content, numericValue };
+                    }
+                }
+                return { content: 'イベントが見つかりませんでした。', numericValue: '' };
+            } catch (error) {
+                console.error('データの取得中にエラーが発生しました:', error);
+                return { content: 'エラーが発生しました。', numericValue: '' };
             }
-            return 'イベントが見つかりませんでした。';
         }
+    
         async function displayTodayEvent() {
             const today = new Date();
             const month = today.getMonth() + 1; // 月は0から始まるので+1
             const day = today.getDate();
             const date = `${month}/${day}`;
-            const event = await fetchEvent(date);
-            document.getElementById('result').innerHTML = `${event}`;
+            const { content, numericValue } = await fetchEvent(date);
+    
+            // 結果をHTMLに表示
+            document.getElementById(CONTENT_ID).innerHTML = content; // HTMLタグを含む内容を表示
+            document.getElementById(NUMERIC_VALUE_ID).innerText = `（${numericValue}件）`;
         }
+    
         document.addEventListener('DOMContentLoaded', displayTodayEvent);
     </script>
+    
+    
 
-<div class="space2">この日のツイート</div>
 
-    <p id="result">読み込み中...</p>
+<div class="space2">この日のツイート<span id="num">読み込み中...</span></div>
+
+<p id="tweet">読み込み中...</p>
 </div>
 </body>
 </html>
@@ -196,7 +220,7 @@ font-style: normal;
   position: absolute;
     bottom: 0px;
     left: 0px;
-    width: 60%;
+    width: 50%;
   }
   ul {
     list-style: none;
