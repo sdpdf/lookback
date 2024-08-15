@@ -25,9 +25,9 @@ font-style: normal;
 
   .bottom-left {
   position: absolute;
-    bottom: 0px;
+    bottom: 20px;
     left: 0px;
-    width: 40%;
+    width: 30%;
   }
 
 /*
